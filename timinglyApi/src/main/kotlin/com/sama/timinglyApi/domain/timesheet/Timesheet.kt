@@ -17,7 +17,7 @@ data class Timesheet(
 
     var date: Instant,
 
-    var hours: Float
+    var hours: Double
 
 ) {
     init {
@@ -37,7 +37,7 @@ data class Timesheet(
             userId = entity.userId,
             projectName = entity?.projectName,
             projectId = entity.projectId,
-            date= entity.date,
+            date = entity.date,
             hours = entity.hours
         )
     }

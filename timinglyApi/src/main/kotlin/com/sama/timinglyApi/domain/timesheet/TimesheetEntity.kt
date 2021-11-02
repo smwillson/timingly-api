@@ -24,7 +24,7 @@ data class TimesheetEntity(
 
     var date: Instant,
 
-    var hours: Float
+    var hours: Double
 ) : BaseEntity() {
     init {
         validate(this) {
@@ -34,20 +34,19 @@ data class TimesheetEntity(
 
             validate(TimesheetEntity::date).isNotNull()
 
-            validate(TimesheetEntity::hours).isNotNull().isGreaterThanOrEqualTo(0F)
+            validate(TimesheetEntity::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
         }
     }
 
     companion object {
         fun from(timesheet: Timesheet): TimesheetEntity {
-            val entity = TimesheetEntity(
+            return TimesheetEntity(
                 userId = timesheet.userId,
                 projectName = timesheet.projectName,
                 projectId = timesheet.projectId,
                 date = timesheet.date,
                 hours = timesheet.hours
             )
-            return entity
         }
     }
 }
