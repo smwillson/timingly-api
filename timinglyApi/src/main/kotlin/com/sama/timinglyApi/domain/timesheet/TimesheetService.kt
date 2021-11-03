@@ -1,8 +1,10 @@
 package com.sama.timinglyApi.domain.timesheet
 
+import org.springframework.stereotype.Service
 import java.time.Instant
 import java.util.*
 
+@Service
 class TimesheetService {
     fun getTimesheetResponse(userId: String, fromTime: Instant, toTime: Instant): TimesheetResponse {
         //get timesheets -> findByUserId

@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    username: timinglyappuser
+    password: crud
+    url: jdbc:postgresql://localhost:5433/timinglydb
+    driver-class-name: org.postgresql.Driver
