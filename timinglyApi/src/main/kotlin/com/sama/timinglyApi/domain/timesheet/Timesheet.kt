@@ -28,7 +28,7 @@ data class Timesheet(
 
             validate(Timesheet::date).isNotNull()
 
-            validate(Timesheet::hours).isNotNull().isGreaterThanOrEqualTo(0F)
+            validate(Timesheet::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
         }
     }
     companion object{

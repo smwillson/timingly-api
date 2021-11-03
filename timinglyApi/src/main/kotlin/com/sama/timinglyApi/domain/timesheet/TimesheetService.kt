@@ -18,11 +18,15 @@ class TimesheetService {
         )
         return TimesheetResponse(
             userName = "Samwell Tarley",
-            userId = UUID.randomUUID(),
+            userId = UUID.randomUUID().toString(),
             rangeEndDate = Instant.now(),
             rangeStartDate = Instant.now(),
             timesheets = listOf(timesheet)
 
         )
+    }
+
+    fun createTimesheet(userId: UUID): CreateTimesheetResponse {
+        return CreateTimesheetResponse(timeSheetId = UUID.randomUUID().toString())
     }
 }
