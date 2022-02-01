@@ -1,16 +1,45 @@
 package com.sama.timinglyApi.domain.timesheet
 
-import java.time.Instant
-import java.util.*
-
 data class TimesheetResponse(
-    val userName: String,
-    val userId:String,
-    val rangeStartDate: Instant,
-    val rangeEndDate: Instant,
-    val timesheets: List<Timesheet>
+    val timesheetsForDate: MutableMap<String, List<Timesheet> >,
 )
 
-data class CreateTimesheetResponse(val timeSheetId:String)
+data class CreateTimesheetResponse(val timeSheetId: String)
+/*
+{
+    "1-16-2021": [
+        {
+            "name": "Project A",
+            "hours": 13
+        },
+        {
+            "name": "Project B",
+            "hours": 1
+        }
 
+    ],
+    "1-17-2021": [
+        {
+            "name": "Project A",
+            "hours": 2
+        },
+        {
+            "name": "Project B",
+            "hours": 0
+        }
 
+    ],
+    "1-18-2021": [
+        {
+            "name": "Project A",
+            "hours": 0
+        },
+        {
+            "name": "Project B",
+            "hours": 0
+        }
+
+    ],
+
+}
+* */

@@ -1,34 +1,93 @@
 package com.sama.timinglyApi.domain.timesheet
 
+import com.sama.timinglyApi.getDatesOfWeek
+import com.sama.timinglyApi.getFirstDayOfWeek
+import com.sama.timinglyApi.getLastDayOfWeek
+import com.sama.timinglyApi.isDayBetweenStartAndEndOfWeek
 import org.springframework.stereotype.Service
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 @Service
 class TimesheetService {
     fun getTimesheetResponse(userId: String, fromTime: Instant, toTime: Instant): TimesheetResponse {
-        //get timesheets -> findByUserId
-        //check not null
+        // get timesheets -> findByUserId
+        // check not null
+        val week = Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.WEEK_OF_YEAR)
+//        LocalDateTime.now(DEFAULT_ZONE_ID)
+//            .with(LocalTime.MIN)
+//            .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
+        val DEFAULT_ZONE_ID = ZoneId.of("UTC")
+        val endOfWeek = LocalDateTime.now(DEFAULT_ZONE_ID).getLastDayOfWeek()
+        val startOfWeek = LocalDateTime.now(DEFAULT_ZONE_ID).getFirstDayOfWeek()
+//        println("hello")
+//        println(LocalDateTime.now(DEFAULT_ZONE_ID).getFirstDayOfWeek())
+//        println(endOfWeek)
+//        println(LocalDateTime.now(DEFAULT_ZONE_ID).isDayBetweenStartAndEndOfWeek(endOfWeek))
+
+        var day = startOfWeek
+        while (day.isDayBetweenStartAndEndOfWeek(endOfWeek)) {
+            println(day)
+            day = day.plus(1, ChronoUnit.DAYS)
+        }
 
         val timesheet = Timesheet(
             id = UUID.randomUUID(),
             userId = UUID.randomUUID(),
             projectId = UUID.randomUUID(),
             projectName = "random project",
-            date = Instant.now(),
-            hours = 8.5
+            date = LocalDateTime.now(),
+            hours = 9.0
         )
+
+        val timesheet2 = Timesheet(
+            id = UUID.randomUUID(),
+            userId = UUID.randomUUID(),
+            projectId = UUID.randomUUID(),
+            projectName = "random project again",
+            date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
+            hours = 6.5
+        )
+
+        val timesheet3 = Timesheet(
+            id = UUID.randomUUID(),
+            userId = UUID.randomUUID(),
+            projectId = UUID.randomUUID(),
+            projectName = "third random project",
+            date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
+            hours = 10.0
+        )
+        println(timesheet.date.truncatedTo(ChronoUnit.DAYS))
+        val totalTimesheets = mutableListOf(timesheet, timesheet2, timesheet3)
+        val defaultTimesheet = Timesheet(
+            id = UUID.randomUUID(),
+            userId = UUID.randomUUID(),
+            projectId = UUID.randomUUID(),
+            projectName = "random project again",
+            date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
+            hours = 0.0
+        )
+        val timesheetsForWeek = mutableMapOf<String, List<Timesheet>>()
+        val datesForWeek = getDatesOfWeek(startOfWeek, endOfWeek)
+        for (date in datesForWeek) {
+            val thisTimesheet = totalTimesheets.filter { timesheet -> timesheet.date.truncatedTo(ChronoUnit.DAYS).isEqual(date) }
+            if (thisTimesheet.isNotEmpty()) {
+                timesheetsForWeek[date.truncatedTo(ChronoUnit.DAYS).toString()] = thisTimesheet
+            } else {
+                timesheetsForWeek[date.toString()] = mutableListOf(defaultTimesheet)
+            }
+        }
         return TimesheetResponse(
-            userName = "Samwell Tarley",
-            userId = UUID.randomUUID().toString(),
-            rangeEndDate = Instant.now(),
-            rangeStartDate = Instant.now(),
-            timesheets = listOf(timesheet)
+            timesheetsForWeek
 
         )
     }
 
     fun createTimesheet(userId: UUID): CreateTimesheetResponse {
+
         return CreateTimesheetResponse(timeSheetId = UUID.randomUUID().toString())
     }
 }

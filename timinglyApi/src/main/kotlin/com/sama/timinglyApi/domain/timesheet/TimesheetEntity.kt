@@ -7,6 +7,7 @@ import org.valiktor.functions.isGreaterThanOrEqualTo
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
 import java.time.Instant
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Table
@@ -22,7 +23,7 @@ data class TimesheetEntity(
 
     var projectId: UUID,
 
-    var date: Instant,
+    var date: LocalDateTime,
 
     var hours: Double
 ) : BaseEntity() {

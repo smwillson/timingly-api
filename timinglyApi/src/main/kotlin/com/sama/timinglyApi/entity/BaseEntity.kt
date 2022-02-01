@@ -28,7 +28,7 @@ import javax.persistence.MappedSuperclass
     TypeDef(name = "string-array", typeClass = StringArrayType::class)
 )
 @EntityListeners(AuditingEntityListener::class)
-open  class BaseEntity(
+open class BaseEntity(
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")

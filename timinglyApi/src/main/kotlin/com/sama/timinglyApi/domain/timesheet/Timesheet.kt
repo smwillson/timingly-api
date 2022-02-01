@@ -3,8 +3,8 @@ package com.sama.timinglyApi.domain.timesheet
 import org.valiktor.functions.isGreaterThanOrEqualTo
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
-import java.time.Instant
-import java.util.*
+import java.time.LocalDateTime
+import java.util.UUID
 
 data class Timesheet(
     val id: UUID = UUID.randomUUID(),
@@ -15,7 +15,7 @@ data class Timesheet(
 
     var projectId: UUID,
 
-    var date: Instant,
+    var date: LocalDateTime,
 
     var hours: Double
 
@@ -31,8 +31,8 @@ data class Timesheet(
             validate(Timesheet::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
         }
     }
-    companion object{
-        fun from(entity: TimesheetEntity)= Timesheet(
+    companion object {
+        fun from(entity: TimesheetEntity) = Timesheet(
             id = entity.id,
             userId = entity.userId,
             projectName = entity?.projectName,

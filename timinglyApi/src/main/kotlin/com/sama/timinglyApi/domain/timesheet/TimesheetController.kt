@@ -6,9 +6,11 @@ import java.time.Instant
 import java.util.*
 
 //timesheets?userId=username1243&fromTime={iso-8601}&toTime={iso-8601}
+@CrossOrigin(origins = ["*"])
 @RestController
 @RequestMapping("/timesheets")
 class TimesheetController(val timesheetService: TimesheetService) {
+
     @GetMapping
     fun getTimesheets(
         @RequestParam("userId") userId: String,

@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class TiminglyApiApplication
 
 fun main(args: Array<String>) {
-	runApplication<TiminglyApiApplication>(*args)
+
+    runApplication<TiminglyApiApplication>(*args)
 }
