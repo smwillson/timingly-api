@@ -60,4 +60,13 @@ open class BaseEntity(
             other.createdBy == createdBy &&
             other.updatedBy == updatedBy
     }
+
+    override fun hashCode(): Int {
+        var result = id.hashCode()
+        result = 31 * result + createdTime.hashCode()
+        result = 31 * result + updatedTime.hashCode()
+        result = 31 * result + createdBy.hashCode()
+        result = 31 * result + updatedBy.hashCode()
+        return result
+    }
 }

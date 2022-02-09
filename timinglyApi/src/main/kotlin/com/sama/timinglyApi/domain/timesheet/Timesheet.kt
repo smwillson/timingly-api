@@ -3,8 +3,9 @@ package com.sama.timinglyApi.domain.timesheet
 import org.valiktor.functions.isGreaterThanOrEqualTo
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
+import java.time.DayOfWeek
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 data class Timesheet(
     val id: UUID = UUID.randomUUID(),
@@ -17,6 +18,8 @@ data class Timesheet(
 
     var date: LocalDateTime,
 
+    val dayOfWeek: DayOfWeek,
+
     var hours: Double
 
 ) {
@@ -28,9 +31,12 @@ data class Timesheet(
 
             validate(Timesheet::date).isNotNull()
 
+            validate(Timesheet::dayOfWeek).isNotNull()
+
             validate(Timesheet::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
         }
     }
+
     companion object {
         fun from(entity: TimesheetEntity) = Timesheet(
             id = entity.id,
@@ -38,7 +44,8 @@ data class Timesheet(
             projectName = entity?.projectName,
             projectId = entity.projectId,
             date = entity.date,
-            hours = entity.hours
+            dayOfWeek = entity.dayOFWeek,
+            hours = entity.hours,
         )
     }
 }

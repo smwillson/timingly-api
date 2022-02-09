@@ -6,10 +6,12 @@ import org.hibernate.annotations.Where
 import org.valiktor.functions.isGreaterThanOrEqualTo
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
-import java.time.Instant
+import java.time.DayOfWeek
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
 import javax.persistence.Table
 
 @Table(name = "time_sheet")
@@ -25,8 +27,13 @@ data class TimesheetEntity(
 
     var date: LocalDateTime,
 
+    @Enumerated(EnumType.STRING)
+    var dayOFWeek: DayOfWeek,
+
     var hours: Double
+
 ) : BaseEntity() {
+
     init {
         validate(this) {
             validate(TimesheetEntity::userId).isNotNull()
@@ -36,6 +43,8 @@ data class TimesheetEntity(
             validate(TimesheetEntity::date).isNotNull()
 
             validate(TimesheetEntity::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
+
+            validate(TimesheetEntity::dayOFWeek).isNotNull()
         }
     }
 
@@ -46,9 +55,9 @@ data class TimesheetEntity(
                 projectName = timesheet.projectName,
                 projectId = timesheet.projectId,
                 date = timesheet.date,
+                dayOFWeek = timesheet.dayOfWeek,
                 hours = timesheet.hours
             )
         }
     }
 }
-

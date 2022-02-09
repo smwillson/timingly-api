@@ -17,17 +17,9 @@ class TimesheetService {
         // get timesheets -> findByUserId
         // check not null
         val week = Calendar.getInstance(TimeZone.getTimeZone("UTC")).get(Calendar.WEEK_OF_YEAR)
-//        LocalDateTime.now(DEFAULT_ZONE_ID)
-//            .with(LocalTime.MIN)
-//            .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY))
         val DEFAULT_ZONE_ID = ZoneId.of("UTC")
         val endOfWeek = LocalDateTime.now(DEFAULT_ZONE_ID).getLastDayOfWeek()
         val startOfWeek = LocalDateTime.now(DEFAULT_ZONE_ID).getFirstDayOfWeek()
-//        println("hello")
-//        println(LocalDateTime.now(DEFAULT_ZONE_ID).getFirstDayOfWeek())
-//        println(endOfWeek)
-//        println(LocalDateTime.now(DEFAULT_ZONE_ID).isDayBetweenStartAndEndOfWeek(endOfWeek))
-
         var day = startOfWeek
         while (day.isDayBetweenStartAndEndOfWeek(endOfWeek)) {
             println(day)
@@ -40,6 +32,7 @@ class TimesheetService {
             projectId = UUID.randomUUID(),
             projectName = "random project",
             date = LocalDateTime.now(),
+            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
             hours = 9.0
         )
 
@@ -49,6 +42,7 @@ class TimesheetService {
             projectId = UUID.randomUUID(),
             projectName = "random project again",
             date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
+            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
             hours = 6.5
         )
 
@@ -58,9 +52,10 @@ class TimesheetService {
             projectId = UUID.randomUUID(),
             projectName = "third random project",
             date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
+            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
             hours = 10.0
         )
-        println(timesheet.date.truncatedTo(ChronoUnit.DAYS))
+//        println(timesheet.date.truncatedTo(ChronoUnit.DAYS))
         val totalTimesheets = mutableListOf(timesheet, timesheet2, timesheet3)
         val defaultTimesheet = Timesheet(
             id = UUID.randomUUID(),
@@ -68,14 +63,34 @@ class TimesheetService {
             projectId = UUID.randomUUID(),
             projectName = "random project again",
             date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
+            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
             hours = 0.0
         )
+
+// TODO : how to filter by project and default sheets for missing projects????
         val timesheetsForWeek = mutableMapOf<String, List<Timesheet>>()
         val datesForWeek = getDatesOfWeek(startOfWeek, endOfWeek)
         for (date in datesForWeek) {
-            val thisTimesheet = totalTimesheets.filter { timesheet -> timesheet.date.truncatedTo(ChronoUnit.DAYS).isEqual(date) }
+            val thisTimesheet =
+                totalTimesheets.filter { timesheet -> timesheet.date.truncatedTo(ChronoUnit.DAYS).isEqual(date) }
             if (thisTimesheet.isNotEmpty()) {
                 timesheetsForWeek[date.truncatedTo(ChronoUnit.DAYS).toString()] = thisTimesheet
+                // create a LocalDateTime Object
+                // create a LocalDateTime Object
+                val local = LocalDateTime.parse(timesheet.date.toString())
+
+                // get dayofweek for this LocalDateTime
+
+                // get dayofweek for this LocalDateTime
+                val dayofweek = local.dayOfWeek
+
+                // print result
+
+                // print result
+                println(
+                    "Day of Week: " +
+                        dayofweek
+                )
             } else {
                 timesheetsForWeek[date.toString()] = mutableListOf(defaultTimesheet)
             }
