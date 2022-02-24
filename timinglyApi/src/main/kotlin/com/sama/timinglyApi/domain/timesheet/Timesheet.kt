@@ -1,7 +1,6 @@
 package com.sama.timinglyApi.domain.timesheet
 
 import org.valiktor.functions.isGreaterThanOrEqualTo
-import org.valiktor.functions.isNotNull
 import org.valiktor.validate
 import java.time.DayOfWeek
 import java.time.LocalDateTime
@@ -25,15 +24,7 @@ data class Timesheet(
 ) {
     init {
         validate(this) {
-            validate(Timesheet::userId).isNotNull()
-
-            validate(Timesheet::projectId).isNotNull()
-
-            validate(Timesheet::date).isNotNull()
-
-            validate(Timesheet::dayOfWeek).isNotNull()
-
-            validate(Timesheet::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
+            validate(Timesheet::hours).isGreaterThanOrEqualTo(0.0)
         }
     }
 
@@ -44,7 +35,7 @@ data class Timesheet(
             projectName = entity?.projectName,
             projectId = entity.projectId,
             date = entity.date,
-            dayOfWeek = entity.dayOFWeek,
+            dayOfWeek = entity.dayOfWeek,
             hours = entity.hours,
         )
     }

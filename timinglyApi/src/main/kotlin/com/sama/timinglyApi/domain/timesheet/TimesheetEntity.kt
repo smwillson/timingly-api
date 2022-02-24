@@ -28,7 +28,7 @@ data class TimesheetEntity(
     var date: LocalDateTime,
 
     @Enumerated(EnumType.STRING)
-    var dayOFWeek: DayOfWeek,
+    var dayOfWeek: DayOfWeek,
 
     var hours: Double
 
@@ -36,15 +36,9 @@ data class TimesheetEntity(
 
     init {
         validate(this) {
-            validate(TimesheetEntity::userId).isNotNull()
+            validate(TimesheetEntity::hours).isGreaterThanOrEqualTo(0.0)
 
-            validate(TimesheetEntity::projectId).isNotNull()
-
-            validate(TimesheetEntity::date).isNotNull()
-
-            validate(TimesheetEntity::hours).isNotNull().isGreaterThanOrEqualTo(0.0)
-
-            validate(TimesheetEntity::dayOFWeek).isNotNull()
+            validate(TimesheetEntity::dayOfWeek).isNotNull()
         }
     }
 
@@ -55,7 +49,7 @@ data class TimesheetEntity(
                 projectName = timesheet.projectName,
                 projectId = timesheet.projectId,
                 date = timesheet.date,
-                dayOFWeek = timesheet.dayOfWeek,
+                dayOfWeek = timesheet.dayOfWeek,
                 hours = timesheet.hours
             )
         }

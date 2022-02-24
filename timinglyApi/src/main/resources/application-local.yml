@@ -1,8 +1,15 @@
 spring:
   jpa:
+    properties:
+      hibernate:
+        dialect:com.github.alexliesenfeld.querydsl.jpa.hibernate.PostgreSQLJsonDialect
     show-sql: true
   datasource:
     username: timinglyappuser
     password: crud
     url: jdbc:postgresql://localhost:5433/timinglydb
     driver-class-name: org.postgresql.Driver
+  liquibase:
+#    contexts: local,seed
+    user: timinglyappuser
+    password: crud
