@@ -3,6 +3,7 @@ package com.sama.timinglyApi.domain.timesheet
 import com.sama.timinglyApi.entity.BaseEntity
 import org.hibernate.annotations.SQLDelete
 import org.hibernate.annotations.Where
+import org.hibernate.envers.Audited
 import org.valiktor.functions.isGreaterThanOrEqualTo
 import org.valiktor.functions.isNotNull
 import org.valiktor.validate
@@ -16,21 +17,22 @@ import javax.persistence.Table
 
 @Table(name = "time_sheet")
 @Entity
+@Audited
 @SQLDelete(sql = "UPDATE time_sheet SET deleted = TRUE WHERE id = ?")
 @Where(clause = "NOT deleted")
 data class TimesheetEntity(
-    var userId: UUID,
+    val userId: UUID,
 
-    var projectName: String?,
+    val projectName: String?,
 
-    var projectId: UUID,
+    val projectId: UUID,
 
-    var date: LocalDateTime,
+    val date: LocalDateTime,
 
     @Enumerated(EnumType.STRING)
-    var dayOfWeek: DayOfWeek,
+    val dayOfWeek: DayOfWeek,
 
-    var hours: Double
+    val hours: Double
 
 ) : BaseEntity() {
 
