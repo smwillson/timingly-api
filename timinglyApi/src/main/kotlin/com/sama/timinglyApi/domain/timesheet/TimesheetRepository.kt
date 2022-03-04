@@ -7,5 +7,5 @@ import java.util.*
 @Repository
 interface TimesheetRepository : JpaRepository<TimesheetEntity, UUID> {
 
-    fun findByUserId(userId: UUID): Optional<TimesheetEntity>
+//    fun findByUserId(userId: UUID): Optional<TimesheetEntity>
 }

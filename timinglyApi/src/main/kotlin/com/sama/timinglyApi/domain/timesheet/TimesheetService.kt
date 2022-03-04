@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 @Service
-class TimesheetService {
+class TimesheetService(val timesheetRepository: TimesheetRepository) {
     fun getTimesheetResponse(userId: String, fromTime: Instant, toTime: Instant): TimesheetResponse {
         // get timesheets -> findByUserId
         // check not null
@@ -28,73 +28,71 @@ class TimesheetService {
 
         val timesheet = Timesheet(
             id = UUID.randomUUID(),
-            userId = UUID.randomUUID(),
             projectId = UUID.randomUUID(),
-            projectName = "random project",
             date = LocalDateTime.now(),
-            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
-            hours = 9.0
+//            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
+            hours = 9.0,
+            isDeleted = false
         )
 
         val timesheet2 = Timesheet(
             id = UUID.randomUUID(),
-            userId = UUID.randomUUID(),
             projectId = UUID.randomUUID(),
-            projectName = "random project again",
             date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
-            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
-            hours = 6.5
+//            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
+            hours = 6.5,
+            isDeleted = false
         )
 
         val timesheet3 = Timesheet(
             id = UUID.randomUUID(),
-            userId = UUID.randomUUID(),
             projectId = UUID.randomUUID(),
-            projectName = "third random project",
             date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
-            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
-            hours = 10.0
+//            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
+            hours = 10.0,
+            isDeleted = false
         )
 //        println(timesheet.date.truncatedTo(ChronoUnit.DAYS))
         val totalTimesheets = mutableListOf(timesheet, timesheet2, timesheet3)
         val defaultTimesheet = Timesheet(
             id = UUID.randomUUID(),
-            userId = UUID.randomUUID(),
             projectId = UUID.randomUUID(),
-            projectName = "random project again",
             date = LocalDateTime.now().plus(1, ChronoUnit.DAYS),
-            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
-            hours = 0.0
+//            dayOfWeek = LocalDateTime.parse(LocalDateTime.now().toString()).dayOfWeek,
+            hours = 0.0,
+            isDeleted = false
         )
 
 // TODO : how to filter by project and default sheets for missing projects????
         val timesheetsForWeek = mutableMapOf<String, List<Timesheet>>()
         val datesForWeek = getDatesOfWeek(startOfWeek, endOfWeek)
-        for (date in datesForWeek) {
-            val thisTimesheet =
-                totalTimesheets.filter { timesheet -> timesheet.date.truncatedTo(ChronoUnit.DAYS).isEqual(date) }
-            if (thisTimesheet.isNotEmpty()) {
-                timesheetsForWeek[date.truncatedTo(ChronoUnit.DAYS).toString()] = thisTimesheet
-                // create a LocalDateTime Object
-                // create a LocalDateTime Object
-                val local = LocalDateTime.parse(timesheet.date.toString())
-
-                // get dayofweek for this LocalDateTime
-
-                // get dayofweek for this LocalDateTime
-                val dayofweek = local.dayOfWeek
-
-                // print result
-
-                // print result
-                println(
-                    "Day of Week: " +
-                        dayofweek
-                )
-            } else {
-                timesheetsForWeek[date.toString()] = mutableListOf(defaultTimesheet)
-            }
-        }
+        val allTimesheets = timesheetRepository.findAll()
+        println(allTimesheets)
+//        for (date in datesForWeek) {
+//            val thisTimesheet =
+//                totalTimesheets.filter { timesheet -> timesheet.date.truncatedTo(ChronoUnit.DAYS).isEqual(date) }
+//            if (thisTimesheet.isNotEmpty()) {
+//                timesheetsForWeek[date.truncatedTo(ChronoUnit.DAYS).toString()] = thisTimesheet
+//                // create a LocalDateTime Object
+//                // create a LocalDateTime Object
+//                val local = LocalDateTime.parse(timesheet.date.toString())
+//
+//                // get dayofweek for this LocalDateTime
+//
+//                // get dayofweek for this LocalDateTime
+//                val dayofweek = local.dayOfWeek
+//
+//                // print result
+//
+//                // print result
+//                println(
+//                    "Day of Week: " +
+//                        dayofweek
+//                )
+//            } else {
+//                timesheetsForWeek[date.toString()] = mutableListOf(defaultTimesheet)
+//            }
+//        }
         return TimesheetResponse(
             timesheetsForWeek
 

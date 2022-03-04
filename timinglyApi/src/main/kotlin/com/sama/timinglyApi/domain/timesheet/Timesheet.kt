@@ -9,17 +9,15 @@ import java.util.*
 data class Timesheet(
     val id: UUID = UUID.randomUUID(),
 
-    val userId: UUID,
-
-    var projectName: String?,
-
     var projectId: UUID,
 
     var date: LocalDateTime,
 
-    val dayOfWeek: DayOfWeek,
+//    val dayOfWeek: DayOfWeek?,
 
-    var hours: Double
+    var hours: Double,
+
+    var isDeleted: Boolean
 
 ) {
     init {
@@ -31,11 +29,9 @@ data class Timesheet(
     companion object {
         fun from(entity: TimesheetEntity) = Timesheet(
             id = entity.id,
-            userId = entity.userId,
-            projectName = entity?.projectName,
+            isDeleted = entity.isDeleted,
             projectId = entity.projectId,
             date = entity.date,
-            dayOfWeek = entity.dayOfWeek,
             hours = entity.hours,
         )
     }
