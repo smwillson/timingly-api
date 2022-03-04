@@ -10,6 +10,6 @@ spring:
     url: jdbc:postgresql://localhost:5433/timinglydb
     driver-class-name: org.postgresql.Driver
   liquibase:
-#    contexts: local,seed
+    contexts: local,seed
     user: timinglyappuser
     password: crud

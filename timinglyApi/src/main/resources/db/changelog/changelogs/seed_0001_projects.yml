@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001_projects
+      author: timingly-api
+      context: seed
+      changes:
+        - sql:
+            splitStatements: false
+            sql: |
+              INSERT INTO projects
+              (id, created_time, updated_time, created_by, updated_by, project_name, is_deleted, description, user_id)
+              VALUES('6088ca36-2d00-4b14-a7eb-b3d65a373337','2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z','Julian Kennedy','Julian Kennedy','The Grapes of Wrath','false','','e3e673ea-f0a3-4b91-a037-7f0faea10aed'),
+                    ('6015e855-3aac-4331-9c2c-778a1b739a58','2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z','Vanessa Wild','Vanessa Wild','The Scarlet Letter','false','016-22-26607-26-1','e3e673ea-f0a3-4b91-a037-7f0faea10aed'),
+                    ('16a56669-ba53-4eae-9f31-3b4c1eba60a7','2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z','Jacob Talbot','Jacob Talbot','Alice Adventures in Wonderland','false','This is a new project','e3e673ea-f0a3-4b91-a037-7f0faea10aed'),
+                    ('cf6e049d-c436-4639-851a-a7dc8e0a3787','2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z','Marie Lewin','Marie Lewin','The Good Soldier','false','752-27-31567-23-2','e3e673ea-f0a3-4b91-a037-7f0faea10aed'),
+                    ('d6719bdf-3161-4d70-ad14-74c4be4946d0','2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z','Ada Bennett','Ada Bennett','The Sun Also Rises','false','848-57-61558-82-4','e3e673ea-f0a3-4b91-a037-7f0faea10aed'),
+                    ('80bfef95-d35c-43f4-a7bb-c828ab711abd','2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z','Chad Dixon','Chad Dixon','David Copperfield','false','560-32-07536-50-0','e3e673ea-f0a3-4b91-a037-7f0faea10aed');
+

@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0002_timesheets
+      author: timingly-api
+      context: seed
+      changes:
+        - sql:
+            splitStatements: false
+            sql:
+              INSERT INTO timesheets
+              (id, time_sheet_date, created_time, updated_time, created_by, updated_by, project_id, is_deleted, hours)
+              VALUES('e3e673ea-f0a3-4b91-a037-7f0faea10aed', '2021-04-27T16:51:55.895Z' ,'2021-04-27T16:51:55.895Z',
+              '2021-04-27T16:51:55.895Z',
+              'Chelsea Matthews','Chelsea Matthews','6088ca36-2d00-4b14-a7eb-b3d65a373337','false',7),
+              ('f3e673ea-f0a3-4b91-a037-7f0faea10aed','2021-04-28T16:51:55.895Z', '2021-04-28T16:51:55.895Z', '2021-04-28T16:51:55.895Z','Logan
+              Jenkin','Logan Jenkin','6015e855-3aac-4331-9c2c-778a1b739a58','false',2.5),
+              ('f4e673ea-f0a3-4b91-a037-7f0faea10aed','2021-04-29T16:51:55.895Z',  '2021-04-29T16:51:55.895Z',
+              '2021-04-29T16:51:55.895Z',
+              'Deborah Ventura','Deborah Ventura','16a56669-ba53-4eae-9f31-3b4c1eba60a7','false',2.0),
+              ('f5e673ea-f0a3-4b91-a037-7f0faea10aed', '2021-04-30T16:51:55.895Z','2021-04-30T16:51:55.895Z', '2021-04-30T16:51:55.895Z',
+              'Vanessa Cartwright','Vanessa Cartwright','cf6e049d-c436-4639-851a-a7dc8e0a3787','false',4.5),
+              ('e5e673ea-f0a3-4b91-a037-6f0faea10aed','2021-05-01T16:51:55.895Z', '2021-05-01T16:51:55.895Z',
+              '2021-05-01T16:51:55.895Z',
+              'Bernadette Jacobs','Bernadette Jacobs','d6719bdf-3161-4d70-ad14-74c4be4946d0','true',4.0),
+              ('a1e673ea-f0a3-4b91-a037-7f0faea10aed','2021-04-30T16:51:55.895Z', '2021-04-30T16:51:55.895Z', '2021-04-30T16:51:55.895Z',
+              'Brooklyn Martin','Brooklyn Martin','80bfef95-d35c-43f4-a7bb-c828ab711abd','true',1.5),
+              ('e3e673ea-f0a2-4b91-a037-7f0faea10aed','2021-04-30T16:51:55.895Z', '2021-04-30T16:51:55.895Z',
+              '2021-04-30T16:51:55.895Z',
+              'Chelsea Matthews','Chelsea Matthews','6088ca36-2d00-4b14-a7eb-b3d65a373337','false',7.0),
+              ('f3e673eb-f0a3-4b91-a037-7f0faea10aed', '2021-01-27T16:51:55.895Z','2021-01-27T16:51:55.895Z',
+              '2021-01-27T16:51:55.895Z','Logan
+              Jenkin','Logan Jenkin','6015e855-3aac-4331-9c2c-778a1b739a58','false',1.0),
+              ('e4e673ea-f0a3-4b91-a037-7f0faea10aed','2021-04-30T16:51:55.895Z', '2021-04-30T16:51:55.895Z', '2021-04-30T16:51:55.895Z',
+              'Deborah Ventura','Deborah Ventura','16a56669-ba53-4eae-9f31-3b4c1eba60a7','false',2.5),
+              ('f5f673ea-f0a3-4b91-a037-7f0faea10aed', '2021-02-12T16:51:55.895Z','2021-02-12T16:51:55.895Z',
+              '2021-02-12T16:51:55.895Z',
+              'Vanessa Cartwright','Vanessa Cartwright','cf6e049d-c436-4639-851a-a7dc8e0a3787','false',4.15),
+              ('e5e673ea-f0a3-4b91-a037-7f0faea10aed', '2021-01-30T16:51:55.895Z','2021-01-30T16:51:55.895Z', '2021-01-30T16:51:55.895Z',
+              'Bernadette Jacobs','Bernadette Jacobs','d6719bdf-3161-4d70-ad14-74c4be4946d0','true',4.9),
+              ('a1e673ef-f0a3-4b91-a037-7f0faea10aed','2021-04-03T16:51:55.895Z', '2021-04-03T16:51:55.895Z',
+              '2021-04-03T16:51:55.895Z','Brooklyn Martin','Brooklyn Martin','80bfef95-d35c-43f4-a7bb-c828ab711abd','false',1.0);
+

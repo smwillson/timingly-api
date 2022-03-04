@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0000_users
+      author: timingly-api
+      context: seed
+      changes:
+        - sql:
+            splitStatements: false
+            sql:
+              INSERT INTO users
+              (id, first_name, last_name, created_time, updated_time,created_by, updated_by)
+              VALUES('e3e673ea-f0a3-4b91-a037-7f0faea10aed','David','Pearson','2020-04-30T16:51:55.895Z','2020-04-30T16:51:55.895Z','David Pearson','David Pearson'),
+              ('e3e673ea-f0a3-4b91-a037-7f0faea10aef','Chelsea','Exton','2020-04-30T16:51:55.895Z','2020-04-30T16:51:55.895Z','Chelsea Exton','Chelsea Exton'),
+              ('e3e673ea-f0a3-4b91-a037-7f0eaea10aed','Ron','Forth','2020-05-01T16:51:55.895Z','2020-05-01T16:51:55.895Z','Ron Forth','Ron Forth'),
+              ('f3e673ea-f0a3-4b91-a037-7f0faea10aed','Benny','Selby','2020-04-30T16:51:55.895Z','2020-04-30T16:51:55.895Z','Benny Selby','Benny Selby');
+
